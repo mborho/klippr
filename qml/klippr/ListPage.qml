@@ -199,15 +199,13 @@ Page {
                 }
             }
         }
-
         ToolIcon {
             platformIconId: "toolbar-view-menu"
             anchors.right: (parent === undefined) ? undefined : parent.right
-            onClicked: ((!extraList) ? (listMenu.status === DialogStatus.Closed) ? listMenu.open() : listMenu.close() : false)
+            visible: !extraList
+            onClicked: ((extraList) ? false : (listMenu.status === DialogStatus.Closed) ? listMenu.open() : listMenu.close())
         }
-
     }
-
 
     Menu {
         id: listMenu
