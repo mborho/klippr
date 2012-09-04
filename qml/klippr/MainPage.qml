@@ -123,6 +123,14 @@ Page {
         visualParent: pageStack
         MenuLayout {
             MenuItem {
+                id:aboutButton
+                text: 'About'
+                onClicked: {
+                    aboutLoader.source = "components/AboutDialog.qml";
+                    aboutLoader.item.open();
+                }
+            }
+            MenuItem {
                 text: "Revoke Access"
                 onClicked: appWindow.revokeAccess()
             }

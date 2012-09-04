@@ -258,4 +258,9 @@ PageStackWindow {
         id: editClipDialog
     }
 
+    Loader {
+        id: aboutLoader
+        anchors.fill: parent
+    }
+
 }
