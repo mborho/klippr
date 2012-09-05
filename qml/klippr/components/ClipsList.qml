@@ -113,7 +113,7 @@ import com.nokia.extras 1.1
                     maximumLineCount:2
                     elide: Text.ElideRight
                     font.pixelSize: 28
-                    wrapMode: Text.WordWrap
+                    wrapMode: (title.match(/^https?:\/\//)) ? Text.WrapAnywhere : Text.WordWrap
                     horizontalAlignment: (updated) ? Text.AlignLeft : Text.AlignHCenter
                     color:"white"
                 }
