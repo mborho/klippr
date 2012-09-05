@@ -83,7 +83,7 @@ import com.nokia.extras 1.1
         Rectangle {
             id: listContainer
             width:parent.width
-            height: rowColumn.height + ((expand) ? 35 : 25)
+            height: rowColumn.height + ((expand || !id ) ? 35 : 25)
             color: "#3B3B3B"
             Column {
                 id:rowColumn
@@ -92,6 +92,7 @@ import com.nokia.extras 1.1
                 anchors.leftMargin:10
                 anchors.verticalCenter: parent.verticalCenter
                 Text {
+                    id:listTitle
                     text: title
                     maximumLineCount:2
                     elide: Text.ElideRight
@@ -112,7 +113,14 @@ import com.nokia.extras 1.1
             }
             MouseArea {
                 anchors.fill: rowColumn
-                onClicked: (!id) ? loadNext(path) : listClicked(index);
+                onClicked: {
+                    if(!id) {
+                        listTitle.text = "loading ..."
+                        loadNext(path);
+                    } else {
+                        listClicked(index);
+                    }
+                }
                 onPressed: {parent.color = "#171717"}
                 onReleased: {parent.color = "#3B3B3B"}
                 onCanceled: {parent.color = "#3B3B3B"}

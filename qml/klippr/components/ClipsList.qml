@@ -99,7 +99,7 @@ import com.nokia.extras 1.1
         id: clipsDelegate
         Rectangle {
             width:parent.width
-            height: rowColumn.height + ((updated) ? 15 : 5)
+            height: rowColumn.height + ((updated) ? 15 : 35)
             color: "#3B3B3B"
             Column {
                 id:rowColumn
@@ -108,6 +108,7 @@ import com.nokia.extras 1.1
                 anchors.leftMargin:10
                 anchors.verticalCenter: parent.verticalCenter
                 Text {
+                    id: clipTitle
                     width:parent.width-((feedView) ? 75 : 45)
                     text: title
                     maximumLineCount:2
@@ -125,6 +126,7 @@ import com.nokia.extras 1.1
                     elide: Text.ElideRight
                     wrapMode: Text.WordWrap
                     color: "white"
+                    visible: (updated)
                 }
             }
             MoreIndicator {
@@ -148,7 +150,14 @@ import com.nokia.extras 1.1
             }
             MouseArea {
                 anchors.fill: rowColumn
-                onClicked: (!updated) ? loadNext(id) : clipClicked(index)
+                onClicked: {
+                    if(!updated) {
+                        clipTitle.text = "loading ..."
+                        loadNext(id);
+                    } else {
+                        clipClicked(index)
+                    }
+                }
                 onPressed: {parent.color = "#171717"}
                 onReleased: {parent.color = "#3B3B3B"}
                 onCanceled: {parent.color = "#3B3B3B"}
