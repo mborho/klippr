@@ -14,7 +14,11 @@ var Data = function() {
     var _list = {};
     //
     this.setLists = function(lists) {
-        _lists = lists;
+        if(lists.meta.previous) {
+            _lists.objects = _lists.objects.concat(lists.objects)
+        } else {
+            _lists = lists;
+        }
     }
     //
     this.getLists = function(index) {

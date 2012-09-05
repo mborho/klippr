@@ -64,7 +64,7 @@ import com.nokia.extras 1.1
     }
 
     function loadNext(path) {
-        appWindow.loadAllLists();
+        appWindow.loadAllLists(path);
     }
 
     function listClicked(index) {

@@ -89,9 +89,10 @@ PageStackWindow {
         onStartup()
     }
 
-    function loadAllLists() {
+    function loadAllLists(path) {
+        var apiPath = (path !== undefined) ?  path : '/api/lists/?limit=10';
         mainPage.startSpinner();
-        getConnector().getData('/api/lists/?limit=50', function(lists) {
+        getConnector().getData(apiPath, function(lists) {
             Kippt.Data.setLists(lists);
             mainPage.start(lists)
         }, onApiError);
