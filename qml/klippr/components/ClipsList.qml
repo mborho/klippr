@@ -153,6 +153,12 @@ import com.nokia.extras 1.1
                 onReleased: {parent.color = "#3B3B3B"}
                 onCanceled: {parent.color = "#3B3B3B"}
             }
+            Rectangle {
+                anchors.bottom: parent.bottom
+                height:1
+                width:parent.width
+                color: "#171717"
+            }
         }
     }
 

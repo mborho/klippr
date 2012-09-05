@@ -83,7 +83,7 @@ import com.nokia.extras 1.1
         Rectangle {
             id: listContainer
             width:parent.width
-            height: rowColumn.height + ((expand) ? 35 : 20)
+            height: rowColumn.height + ((expand) ? 35 : 25)
             color: "#3B3B3B"
             Column {
                 id:rowColumn
@@ -116,6 +116,12 @@ import com.nokia.extras 1.1
                 onPressed: {parent.color = "#171717"}
                 onReleased: {parent.color = "#3B3B3B"}
                 onCanceled: {parent.color = "#3B3B3B"}
+            }
+            Rectangle {
+                anchors.bottom: parent.bottom
+                height:1
+                width:parent.width
+                color: "#171717"
             }
         }
     }
