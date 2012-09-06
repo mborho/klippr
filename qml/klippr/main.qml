@@ -86,6 +86,7 @@ PageStackWindow {
         appWindow._username = "";
         Storage.insertSetting("apiToken", "");
         Storage.insertSetting("username", "");
+        mainPage.clear()
         onStartup()
     }
 
