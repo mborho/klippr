@@ -57,10 +57,6 @@ Page {
         Qt.openUrlExternally ( url )
     }
 
-    function setBackgroundColor(color) {
-        clipContainer.color = color;
-    }
-
     function formatDate(timestamp) {
         var date = new Date(parseInt(timestamp+'000'));
         return  Qt.formatDate(date) +' '+String(Qt.formatTime(date,Qt.TextDate)).substring(0,5);
