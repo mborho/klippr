@@ -16,11 +16,49 @@ Page {
     property bool read_later: false
     property string article: ""
     property bool jumpToOverview: false
-    property bool feedView: false
+    property bool feedView: false    
+
+    states: [
+        State {
+            name: "BlackBack"
+            when: status === PageStatus.Deactivating && pageStack.depth === 4
+            PropertyChanges {
+                target: clipContainer
+                color: "#000000"
+                restoreEntryValues: false
+            }
+            PropertyChanges {
+                target: clipHeader
+                color: "#000000"
+                restoreEntryValues: false
+            }
+        },
+        State {
+            name: "DefaultBack"
+            when: status === PageStatus.Active
+            PropertyChanges {
+                target: clipContainer
+                color: "#3B3B3B"
+                restoreEntryValues: false
+            }
+            PropertyChanges {
+                target: clipHeader
+                color: "#171717"
+                restoreEntryValues: false
+            }
+        }
+    ]
+    transitions: Transition {
+         ColorAnimation {}
+    }
 
     function openUrl(url) {
         console.log('Opening '+url);
         Qt.openUrlExternally ( url )
+    }
+
+    function setBackgroundColor(color) {
+        clipContainer.color = color;
     }
 
     function formatDate(timestamp) {
@@ -152,10 +190,12 @@ Page {
     }
 
     Rectangle {
+        id: clipContainer
         width: parent.width
         height:parent.height
         anchors.fill: parent
         color: "#3B3B3B"
+
         Rectangle {
             id:clipHeader
             height:71
@@ -235,7 +275,7 @@ Page {
             width:parent.width-30
             height: clipUrl.height+20
             z:3
-            color: "#3B3B3B"
+            color: parent.color
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             Text {
