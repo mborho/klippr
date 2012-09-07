@@ -129,23 +129,39 @@ import com.nokia.extras 1.1
                     visible: (updated)
                 }
             }
+            Image {
+                id: placeholderAvatar
+                visible: (feedView && user && updated) ? true : false
+                opacity: (feedView && user && updated) ? 1 : 0;
+                source: "../gfx/kippt-avatar.png"
+                sourceSize.width: 64
+                sourceSize.height: 64
+                width: 56
+                height: 56
+                anchors.verticalCenter: rowColumn.verticalCenter
+                anchors.right: rowColumn.right
+                anchors.rightMargin:15
+                smooth: false
+            }
             MoreIndicator {
+                id: moreIndicator
                 objectName: "indicatorObject"
                 anchors.verticalCenter: rowColumn.verticalCenter
                 anchors.right: rowColumn.right
                 anchors.rightMargin:15
-                visible: false; //(updated) ? true :false
+                visible: (updated) ? true :false
                 smooth: false
                 Component.onCompleted: {
                     if(feedView && user) {
                         source = user.avatar_url;
+                        sourceSize.width = 80
+                        sourceSize.height = 80
                         width = 56
                         height = 56
                         anchors.top = parent.top
                         anchors.topMargin = 15
                         fillMode = Image.PreserveAspectFit
                     }
-                    visible = (updated) ? true :false;
                 }
             }
             MouseArea {
