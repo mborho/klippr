@@ -1,7 +1,7 @@
 Source: klippr
 Section: user/other
 Priority: optional
-Maintainer: martin <martin@unknown>
+Maintainer: Martin Borho <martin@borho.net>
 Build-Depends: debhelper (>= 5), libqt4-dev
 Standards-Version: 3.7.3
 Homepage: <insert the upstream URL, if relevant>

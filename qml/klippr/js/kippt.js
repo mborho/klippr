@@ -120,7 +120,7 @@ Connector.prototype.doRequest = function(options) {
 //    if(data) console.log(data);
     if (xmlHttp) {
         xmlHttp.open(method, url, true);
-        xmlHttp.setRequestHeader("X-Kippt-Client", "Klipper for Meego");
+        xmlHttp.setRequestHeader("X-Kippt-Client", "Klippr for Meego");
         if(this.token) {
             xmlHttp.setRequestHeader("X-Kippt-Username", this.username);
             xmlHttp.setRequestHeader("X-Kippt-API-Token", this.token);

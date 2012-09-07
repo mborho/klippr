@@ -15,7 +15,7 @@ QString KipptConnector::deleteCall(QString ressource,QString path, QByteArray us
 
     QNetworkRequest request;
     request.setUrl(QUrl(path));
-    request.setRawHeader("X-Kippt-Client", "Klipper for Meego");
+    request.setRawHeader("X-Kippt-Client", "Klippr for Meego");
     request.setRawHeader("X-Kippt-Username", username);
     request.setRawHeader("X-Kippt-API-Token", apiToken);
 

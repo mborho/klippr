@@ -1,11 +1,13 @@
 klippr (0.4.0) unstable; urgency=low
   * "About" added
+  * Placeholder for Avatars in Feed
+  * UI modifications
 
- -- martin <martin@unknown>  Tue, 04 Sep 2012 15:17:59 +0200
+ -- Martin Borho <martin@borho.net>  Fri, 07 Sep 2012 19:57:59 +0200
 
 klippr (0.3.0) unstable; urgency=low
   * First beta release
 
- -- martin <martin@unknown>  Sat, 01 Sep 2012 21:52:19 +0200
+ -- Martin Borho <martin@borho.net>  Sat, 01 Sep 2012 21:52:19 +0200
 
 

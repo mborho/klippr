@@ -31,8 +31,9 @@ Dialog {
             width: parent.width
             color:"white"
             font.pixelSize: 22
-            text: "Login with your username\n and password"
+            text: 'No account yet? <a href="https://kippt.com/signup/" style="color:red">Click here!</a>'
             anchors.top: parent.top
+            onLinkActivated: Qt.openUrlExternally("https://kippt.com/signup/")
         }
         TextField {
             id: authUsername
