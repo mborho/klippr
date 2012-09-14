@@ -1,3 +1,8 @@
+klippr (0.6.0) unstable; urgency=low
+  * Search added, bugfixes
+
+ -- Martin Borho <martin@borho.net>  Fri, 14 Sep 2012 13:28:51 +0200
+
 klippr (0.4.0) unstable; urgency=low
   * "About" added
   * Placeholder for Avatars in Feed
