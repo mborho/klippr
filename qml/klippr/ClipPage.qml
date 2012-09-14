@@ -85,7 +85,7 @@ Page {
         }
         clipTitle.text = clip.title;
         clipDate.text = formatDate(clip.updated);
-        if(clip.notes) {
+        if(clip.notes || clipNotes.text != "") {
             clipNotes.text = clip.notes;
         }
         starred = clip.is_starred;
