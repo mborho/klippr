@@ -151,7 +151,7 @@ Page {
             width:45
             height:45
             radius:20
-            color:  "#2E3E30" //"#3B4F3E" //#425845"//#585858"
+            color:  "#2E3E30"
             Text {
                 id: clipCount
                 font.pixelSize: 25

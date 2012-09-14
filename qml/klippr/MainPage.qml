@@ -100,15 +100,23 @@ Page {
             platformStyle: BusyIndicatorStyle { size: "medium" }
             anchors.left: parent.left
             anchors.leftMargin: 25
+            width:80
             anchors.verticalCenter: parent.verticalCenter
         }
        ToolIcon {
             id: addClipIcon
             platformIconId: "toolbar-add";
             visible: true
-            anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
                 editClipDialog.showNew()
+            }
+        }
+        ToolIcon {
+            id: searchIcon
+            platformIconId: "toolbar-search";
+            visible: true
+            onClicked: {
+                searchPage.show()
             }
         }
         ToolIcon {

@@ -15,6 +15,7 @@ import com.nokia.extras 1.1
 
     property bool showListName: false
     property bool feedView: false
+    property bool searchView: false
     property int maxSubtitleLines: 3
 
     function formatDate(timestamp) {
@@ -39,6 +40,9 @@ import com.nokia.extras 1.1
         var max = clipsModel.count;
         for(var x=0; max>x;x++) {
             if(clipsModel.get(x).id === clip.id) {
+                if(typeof(clip.list) === "string") {
+                    clip.list = clipsModel.get(x).list;
+                }
                 clip.subtitle = buildSubtitle(clip)
                 clipsModel.set(x, clip);
                 break;
@@ -62,6 +66,7 @@ import com.nokia.extras 1.1
         }
 
         feedView = (clips.list.id === "feed") ? true :false;
+        searchView = (clips.list.id === "search") ? true :false;
 
         if(clips.meta.previous) {
             clipsModel.remove(clipsModel.count-1)
@@ -83,12 +88,13 @@ import com.nokia.extras 1.1
 
     function loadNext(path) {
         showSpinner()
-        appWindow.loadList({path:path})
+        if(searchView) appWindow.loadSearchResults({path:path})
+        else appWindow.loadList({path:path})
     }
 
     function clipClicked(index) {
         var clip = clipsModel.get(index)
-        appWindow.loadClip({index:index, path:"/api/clips/"+clip.id+"/?include_data=list"})
+        appWindow.loadClip({index:index, search:searchView, path:"/api/clips/"+clip.id+"/?include_data=list"})
     }
 
     ListModel {

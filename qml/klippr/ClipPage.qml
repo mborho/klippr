@@ -16,7 +16,8 @@ Page {
     property bool read_later: false
     property string article: ""
     property bool jumpToOverview: false
-    property bool feedView: false    
+    property bool feedView: false
+    property bool searchView: false
 
     states: [
         State {
@@ -113,6 +114,7 @@ Page {
     function render(clip) {
         clear()
         feedView = (Kippt.Data.getList().id === "feed") ? true :false;
+        searchView = (Kippt.Data.getList().id === "search") ? true :false;
         clipId = clip.id
         clipList.text = clip.list.title
         clipDomain.text = clip.url_domain;
@@ -146,6 +148,7 @@ Page {
         var options = {
             clipId: clipId,
             path: '/api/clips/'+clipId+'/',
+            search: searchView,
             data: data
         }
         appWindow.updateClip(options)
@@ -157,6 +160,7 @@ Page {
             clipId: clipId,
             list: list,
             path: '/api/clips/'+clipId+'/',
+            search: searchView,
             data: {is_starred: starred, is_read_later:read_later, list:list.resource_uri}
         }
         appWindow.moveClip(options);
@@ -168,7 +172,8 @@ Page {
         params.is_read_later = read_later;
         var options = {
             path: '/api/clips/'+clipId+'/',
-            data: params
+            data: params,
+            search: searchView
         }
         appWindow.updateClip(options)
     }

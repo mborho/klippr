@@ -108,12 +108,21 @@ PageStackWindow {
         });
     }
 
+    function loadSearchResults(options) {
+        getConnector().getData(options.path, function(links) {
+            Kippt.Data.setList(options);
+            searchPage.item.render(options, links);
+        });
+    }
+
     function loadClip(options) {
-        listPage.item.showSpinner()
+        if(options.search) searchPage.item.showSpinner()
+        else listPage.item.showSpinner()
         getConnector().getData(options.path, function(clip) {
             Kippt.Data.setClip(clip)
             clipPage.show(clip)
-            listPage.item.hideSpinner()
+            if(options.search) searchPage.item.hideSpinner()
+            else listPage.item.hideSpinner()
         });
     }
 
@@ -158,9 +167,15 @@ PageStackWindow {
 
     function updateClip(options) {
         getConnector().updateData(options, function(clip) {
-            Kippt.Data.setClip(clip)
-            listPage.item.updateClipInList(clip)
-            clipPage.item.update(clip, listPage.item.listId);
+            Kippt.Data.setClip(clip)            
+            if(!options.search) {
+                var listId = listPage.item.listId
+                listPage.item.updateClipInList(clip)
+            } else {
+                var listId;
+                searchPage.item.updateClipInList(clip)
+            }
+            clipPage.item.update(clip, listId);
         }, onApiError);
     }
 
@@ -206,7 +221,27 @@ PageStackWindow {
         }
     }
 
-   Loader {
+    Loader {
+        id:searchPage
+        onStatusChanged: {
+            if (searchPage.status == Loader.Ready) {
+                show();
+            }
+        }
+        function show() {
+            if (searchPage.status == Loader.Ready) {
+                if(pageStack.depth === 1) {
+                    searchPage.item.clear();
+                    pageStack.push(searchPage.item);
+                    searchPage.item.setInputFocus();
+                }
+            } else {
+                searchPage.source = "SearchPage.qml"
+            }
+        }
+    }
+
+    Loader {
         id:clipPage
         onStatusChanged: {
             if (clipPage.status == Loader.Ready) {
