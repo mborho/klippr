@@ -171,7 +171,7 @@ Page {
         var options = {
             clipId: clipId,
             list: list,
-            path: '/api/clips/'+clipId+'/',
+            path: '/api/clips/'+clipId+'/?include_data=list',
             search: searchView,
             data: {is_starred: starred, is_read_later:read_later, list:list.resource_uri}
         }

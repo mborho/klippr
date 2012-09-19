@@ -182,6 +182,14 @@ PageStackWindow {
 
     function moveClip(options) {
         getConnector().updateData(options, function(clip) {
+            listPage.item.updateClipInList(clip);
+            if(!options.search) {
+                var listId = listPage.item.listId
+                listPage.item.updateClipInList(clip)
+            } else {
+                var listId;
+                searchPage.item.updateClipInList(clip)
+            }
             clipPage.item.updateList(options.list);
         }, onApiError);
     }
