@@ -9,9 +9,18 @@ var App = {
 
 var Data = function() {
     //
+    var _user = {};
     var _lists = {};
     var _clip = {};
-    var _list = {};
+    var _list = {};    
+    //
+    this.setUser =  function(user) {
+        _user = user;
+    }
+    //
+    this.getUser =  function() {
+        return _user;
+    }
     //
     this.setLists = function(lists) {
         if(lists.meta.previous) {

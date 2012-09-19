@@ -53,6 +53,7 @@ PageStackWindow {
         if(!_apiToken || !_username) {
             authDialog.open()
         } else {
+            Kippt.Data.setUser({username:_username});
             loadAllLists();
         }
     }

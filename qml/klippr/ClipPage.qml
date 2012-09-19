@@ -63,6 +63,18 @@ Page {
         return  Qt.formatDate(date) +' '+String(Qt.formatTime(date,Qt.TextDate)).substring(0,5);
     }
 
+    function getListTitle(clip) {
+        var title = "";
+        if(typeof(clip.user) === "object") {
+            var appUser = Kippt.Data.getUser();
+            if(appUser.username !== clip.user.username) {
+                title = clip.user.username+' / ';
+            }
+        }
+        title += clip.list.title;
+        return title;
+    }
+
     function handleFlickableInteraction() {
 //        console.log(clipNotes.height+" < "+flickableNotes.height)
 //        if(screen.currentOrientation === Screen.Portrait) {
@@ -116,7 +128,7 @@ Page {
         feedView = (Kippt.Data.getList().id === "feed") ? true :false;
         searchView = (Kippt.Data.getList().id === "search") ? true :false;
         clipId = clip.id
-        clipList.text = clip.list.title
+        clipList.text = getListTitle(clip);
         clipDomain.text = clip.url_domain;
         clipTitle.text = clip.title;
         clipUrl.text = clip.url;

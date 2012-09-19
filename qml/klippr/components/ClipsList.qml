@@ -29,7 +29,9 @@ import com.nokia.extras 1.1
         if(clip.updated) {
             subtitle = formatDate(clip.updated);
             if(showListName) {
-                subtitle += ' in '+clip.list.title+' ';
+                subtitle += ' in '
+                if(feedView) subtitle += clip.user.username+' / ';
+                subtitle += clip.list.title+' ';
             }
             subtitle += (clip.notes) ? ((showListName) ? '\n':' / ' )+clip.notes.trim() : ''
         }
@@ -93,8 +95,12 @@ import com.nokia.extras 1.1
     }
 
     function clipClicked(index) {
-        var clip = clipsModel.get(index)
-        appWindow.loadClip({index:index, search:searchView, path:"/api/clips/"+clip.id+"/?include_data=list"})
+        var clip = clipsModel.get(index);
+        appWindow.loadClip({
+            index:index,
+            search:searchView,
+            path:"/api/clips/"+clip.id+"/?include_data=list"+((feedView) ? ",user" : "")
+        });
     }
 
     ListModel {
