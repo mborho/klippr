@@ -1,3 +1,8 @@
+klippr (0.8.0) unstable; urgency=low
+  * Reader fontsize adjustable, username in Feed
+
+ -- Martin Borho <martin@borho.net>  Wed, 19 Sep 2012 20:27:10 +0200
+
 klippr (0.6.0) unstable; urgency=low
   * Search added, bugfixes
 
