@@ -11,7 +11,7 @@ Page {
     id: readerPage
     tools: readerTools
     property string url: ""
-    property int fontSize: 100;
+    property int fontSize: 30;
 
     function clear() {
         url = ""
@@ -32,7 +32,7 @@ Page {
         clear()
         url = clip.url
         webView.html = buildHtml(clip)
-        fontSize = 100;
+        fontSize = 30;
     }
 
     Flickable {
@@ -50,7 +50,6 @@ Page {
             html:""
             preferredWidth: flickable.width
             preferredHeight: flickable.height
-            settings.defaultFontSize : 30
             scale: 1
             settings.javascriptEnabled: true
             javaScriptWindowObjects: QtObject {
@@ -65,9 +64,9 @@ Page {
 
             function setFontSize(diff) {
                 var newSize = fontSize+diff;
-                if(newSize > 45 && newSize < 175) {
+                if(newSize > 8 && newSize < 60) {
                     fontSize = newSize;
-                    evaluateJavaScript("document.getElementById('body').style.fontSize = '"+fontSize+"%';");
+                    evaluateJavaScript("document.getElementById('body').style.fontSize = '"+fontSize+"px';");
                 }
             }
         }
@@ -100,7 +99,7 @@ Page {
             iconId: "toolbar-up";
             anchors.right: downIcon.left
             onClicked: {
-                webView.setFontSize(+5);//bigger()
+                webView.setFontSize(+2);
             }
         }
         ToolIcon {
@@ -108,7 +107,7 @@ Page {
             iconId: "toolbar-down";
             anchors.right: parent.right
             onClicked: {
-                webView.setFontSize(-5);
+                webView.setFontSize(-2);
             }
         }
     }
