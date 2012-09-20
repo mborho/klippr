@@ -95,19 +95,40 @@ Page {
                 Qt.openUrlExternally ( url )
             }
         }
-        ToolIcon {
-            iconId: "toolbar-up";
+        Image {
+            id: upIcon
             anchors.right: downIcon.left
-            onClicked: {
-                webView.setFontSize(+2);
+            anchors.rightMargin: 40
+            source: "gfx/fontsize_up.png"
+            Behavior on opacity {
+                NumberAnimation { duration: 500 }
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    webView.setFontSize(+2);
+                }
+                onPressed: {parent.opacity = 0.1}
+                onReleased: {parent.opacity = 1}
+                onCanceled: {parent.opacity = 1}
             }
         }
-        ToolIcon {
-            id:downIcon
-            iconId: "toolbar-down";
+        Image {
+            id: downIcon
             anchors.right: parent.right
-            onClicked: {
-                webView.setFontSize(-2);
+            anchors.rightMargin: 35
+            source: "gfx/fontsize_down.png"
+            Behavior on opacity {
+                NumberAnimation { duration: 500 }
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    webView.setFontSize(-2);
+                }
+                onPressed: {parent.opacity = 0.1}
+                onReleased: {parent.opacity = 1}
+                onCanceled: {parent.opacity = 1}
             }
         }
     }
