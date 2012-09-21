@@ -1,3 +1,8 @@
+klippr (1.0.0) unstable; urgency=low
+  * Ovi store
+
+ -- Martin Borho <martin@borho.net>  Fri, 21 Sep 2012 20:39:52 +0200
+
 klippr (0.8.0) unstable; urgency=low
   * Reader fontsize adjustable, username in Feed
 
