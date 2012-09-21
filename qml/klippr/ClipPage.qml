@@ -382,6 +382,7 @@ Page {
         }
         ToolIcon {
             platformIconId: "toolbar-view-menu"
+            visible: !clipPage.feedView
             anchors.right: (parent === undefined) ? undefined : parent.right
             onClicked: ((!clipPage.feedView) ? ((clipMenu.status === DialogStatus.Closed) ? clipMenu.open() : clipMenu.close()) : false)
         }
