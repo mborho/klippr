@@ -7,7 +7,7 @@ import com.nokia.meego 1.0
 
 Dialog {
     id: authDialog
-    width: parent.width-30
+    width: 380
     title: Item {
         id: titleField
         height: 60
@@ -16,52 +16,55 @@ Dialog {
             font.pixelSize: 40
             color: "red"
             text: "Your Kippt.com Login"
+            anchors.horizontalCenter: parent.horizontalCenter
         }
     }
 
     content: Item {
         id: authInput
-        height:childrenRect.height+20
+        height:childrenRect.height+25
         width: parent.width
-//        anchors.top: titleField.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        Text {
-            id: text
-            height: 70
-            width: parent.width
-            color:"white"
-            font.pixelSize: 22
-            text: 'No account yet? <a href="https://kippt.com/signup/" style="color:red">Click here!</a>'
-            anchors.top: parent.top
-            onLinkActivated: Qt.openUrlExternally("https://kippt.com/signup/")
-        }
         TextField {
             id: authUsername
-            height:40
+            height:50
             width: parent.width
-            anchors.top: text.bottom
             placeholderText: "Username"
             maximumLength: 80
         }
         TextField {
             id: authPassword
             anchors.top: authUsername.bottom
-            height:40
+            height:50
             width: parent.width
             echoMode: TextInput.Password
             placeholderText: "Password"
             maximumLength: 80
-        }
+        }        
     }
 
-    buttons: ButtonRow {
-        style: ButtonStyle { }
+    buttons: Column {
+        id:buttonColumn
+        width:360
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 20
-        height:50
+        spacing:35
+        ButtonRow {
+            id:loginButton
+            style: ButtonStyle { }
+            anchors.horizontalCenter: buttonColumn.horizontalCenter
+            height:50
+            Button {
+                text: "Login";
+                onClicked: authDialog.accept()
+            }
+        }
         Button {
-            text: "OK";
-            onClicked: authDialog.accept()
+            id: registerButton
+            height:40
+            width:350
+            text: "No account? Register here.";
+            anchors.horizontalCenter: buttonColumn.horizontalCenter
+            onClicked: Qt.openUrlExternally("https://kippt.com/signup/")
         }
      }
 
