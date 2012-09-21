@@ -95,40 +95,54 @@ Page {
                 Qt.openUrlExternally ( url )
             }
         }
-        Image {
-            id: upIcon
-            anchors.right: downIcon.left
-            anchors.rightMargin: 40
-            source: "gfx/fontsize_up.png"
-            Behavior on opacity {
-                NumberAnimation { duration: 500 }
+        Rectangle {
+            width:80
+            height:parent.height
+            color: "transparent"
+            anchors.right: downIconBox.left
+            Image {
+                id: upIcon
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+                source: "gfx/fontsize_up.png"
+                Behavior on opacity {
+                    NumberAnimation { duration: 500 }
+                }
             }
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
                     webView.setFontSize(+2);
                 }
-                onPressed: {parent.opacity = 0.1}
-                onReleased: {parent.opacity = 1}
-                onCanceled: {parent.opacity = 1}
+                onPressed: {upIcon.opacity = 0.1}
+                onReleased: {upIcon.opacity = 1}
+                onCanceled: {upIcon.opacity = 1}
             }
         }
-        Image {
-            id: downIcon
+        Rectangle {
+            id: downIconBox
+            width:80
+            height:parent.height
             anchors.right: parent.right
-            anchors.rightMargin: 35
-            source: "gfx/fontsize_down.png"
-            Behavior on opacity {
-                NumberAnimation { duration: 500 }
+            color: "transparent"
+            Image {
+                id: downIcon
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+                source: "gfx/fontsize_down.png"
+                Behavior on opacity {
+                    NumberAnimation { duration: 500 }
+                }
             }
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
+                    console.log("bla")
                     webView.setFontSize(-2);
                 }
-                onPressed: {parent.opacity = 0.1}
-                onReleased: {parent.opacity = 1}
-                onCanceled: {parent.opacity = 1}
+                onPressed: {downIcon.opacity = 0.1}
+                onReleased: {downIcon.opacity = 1}
+                onCanceled: {downIcon.opacity = 1}
             }
         }
     }
