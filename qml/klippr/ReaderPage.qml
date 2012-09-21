@@ -88,6 +88,7 @@ Page {
         ToolButton {
             id: readerOpenUrl
             anchors.left: backIcon.right
+            anchors.leftMargin: 10
             anchors.verticalCenter: parent.verticalCenter
             width: 230
             text: "open in browser"
@@ -137,7 +138,6 @@ Page {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    console.log("bla")
                     webView.setFontSize(-2);
                 }
                 onPressed: {downIcon.opacity = 0.1}
