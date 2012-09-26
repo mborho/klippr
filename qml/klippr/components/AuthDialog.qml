@@ -66,10 +66,68 @@ Dialog {
             anchors.horizontalCenter: buttonColumn.horizontalCenter
             onClicked: Qt.openUrlExternally("https://kippt.com/signup/")
         }
+        Text {
+            width: parent.width
+            text: "Privacy Policy"
+            color:"red"
+            font.pixelSize: 25
+            horizontalAlignment: Text.AlignHCenter
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    privacyPolicy.open();
+                }
+            }
+        }
      }
+
+    Dialog {
+        id: privacyPolicy
+        width: 380
+
+        title: Item {
+            height: 60
+            width: parent.width
+            Text {
+                font.pixelSize: 40
+                color: "red"
+                text: "Privacy Policy"
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+        }
+        content: Item {
+            height:childrenRect.height+25
+            width: parent.width
+            anchors.horizontalCenter: parent.horizontalCenter
+            Text {
+                width: parent.width
+                text: getPrivacyPolicy()
+                color:"white"
+                font.pixelSize: 20
+                wrapMode: Text.WordWrap
+            }
+        }
+        buttons: ButtonRow {
+            style: ButtonStyle { }
+            anchors.horizontalCenter: parent.horizontalCenter
+            Button {
+                text: "OK";
+                onClicked: privacyPolicy.accept()
+            }
+       }
+    }
 
     function accept() {
         appWindow.requestToken(authUsername.text, authPassword.text);
         close()
+    }
+
+    function getPrivacyPolicy() {
+        var policy = "Klippr does only save your username and an extra authtoken, which are needed ";
+        policy += "to authenticate you against kippt.com. ";
+        policy += "This token is requested once with your username and password from kippt.com.\n";
+        policy += " You can revoke access for this app and delete this data by clicking 'Revoke Access' in the app menu ";
+        policy += "or by changing your password on kippt.com.\n";
+        return policy
     }
 }
