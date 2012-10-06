@@ -19,7 +19,7 @@ Page {
     }
 
     function buildHtml(clip) {
-        var html = '<html><style>html {background:#000;} body {color:#fff;font-size:30px;margin-bottom:75px;} a {color:#FFF;font-weight:bold;} ';
+        var html = '<html><style>html {background:#000;} body {color:#fff;font-size:32px;margin-bottom:75px;} a {color:#FFF;font-weight:bold;} ';
         html += 'a:hover {color:#8B8B8B;} img {max-width:100%} span {font-size:85%;} pre {font-size:85%;white-space:pre-wrap;}</style><body id="body">';
         html += '<script>document.onclick= function(e){if(e.target.href) {window.qml.openUrl(e.target.href);};return false;}</script>';
         html += '<h2 id="title">'+clip.title+'</h2>'
