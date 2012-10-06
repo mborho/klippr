@@ -31,18 +31,10 @@ Page {
     function render(clip) {        
         clear()
         appWindow.setFullScreen(true);
-        readerTools.visible = 1;
-        readerTools.opacity = 1
-        startTimer.start()
+        readerTools.opacity = 0;
         url = clip.url
         webView.html = buildHtml(clip)
         fontSize = 30;
-    }
-
-    Timer {
-        id: startTimer
-         interval: 3000; running: false; repeat: false
-         onTriggered: readerTools.opacity = 0
     }
 
     Flickable {
@@ -73,7 +65,6 @@ Page {
             }
 
             function setFontSize(diff) {
-                startTimer.running = false;
                 var newSize = fontSize+diff;
                 if(newSize > 8 && newSize < 60) {
                     fontSize = newSize;
@@ -81,7 +72,6 @@ Page {
                 }
             }
             onDoubleClick: {
-                startTimer.running = false;
                 readerTools.opacity = (readerTools.opacity == 0) ? 1 :0;
             }
         }
@@ -94,7 +84,7 @@ Page {
     ToolBar {
         id:readerTools
         anchors.bottom: parent.bottom
-        opacity: 1
+        opacity: 0
         Behavior on opacity {
             NumberAnimation { duration: 300 }
         }
@@ -104,8 +94,6 @@ Page {
                 iconId: "toolbar-back";
                 onClicked: {
                     appWindow.setFullScreen(false);
-                    startTimer.running = false;
-                    readerTools.visible = false;
                     readerTools.opacity = 0;
                     pageStack.pop();
                 }
