@@ -118,8 +118,12 @@ Page {
         appWindow.deleteList(options);
     }
 
-    function updateClipInList(clip) {
-        clipsList.updateClip(clip);
+    function updateClipInList(clip, moved) {
+        if(moved) {
+            clipsList.removeClip(clip);
+        } else {
+            clipsList.updateClip(clip);
+        }
     }
 
     Rectangle {

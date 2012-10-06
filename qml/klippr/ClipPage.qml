@@ -109,9 +109,9 @@ Page {
         clipList.text = list.title;
         hideSpinner();
         var currentList = Kippt.Data.getList();
-        if(!isNaN(parseInt(currentList.id))) {
-            jumpToOverview = true;
-        }
+//        if(!isNaN(parseInt(currentList.id))) {
+//            jumpToOverview = true;
+//        }
     }
 
     function clear() {

@@ -182,10 +182,9 @@ PageStackWindow {
 
     function moveClip(options) {
         getConnector().updateData(options, function(clip) {
-            listPage.item.updateClipInList(clip);
             if(!options.search) {
-                var listId = listPage.item.listId
-                listPage.item.updateClipInList(clip)
+                var listId = listPage.item.listId;
+                listPage.item.updateClipInList(clip, true);
             } else {
                 var listId;
                 searchPage.item.updateClipInList(clip)

@@ -52,6 +52,16 @@ import com.nokia.extras 1.1
         }
     }
 
+    function removeClip(clip) {
+        var max = clipsModel.count;
+        for(var x=0; max>x;x++) {
+            if(clipsModel.get(x).id === clip.id) {
+                clipsModel.remove(x);
+                break;
+            }
+        }
+    }
+
     function clear() {
         clipsModel.clear()
     }
