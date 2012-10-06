@@ -9,7 +9,7 @@ import "components"
 
 Page {
     id: readerPage
-    tools: readerTools
+    tools: null
     property string url: ""
     property int fontSize: 30;
 
@@ -31,9 +31,17 @@ Page {
     function render(clip) {        
         clear()
         appWindow.setFullScreen(true);
+        readerTools.opacity = 1
+        startTimer.start()
         url = clip.url
         webView.html = buildHtml(clip)
         fontSize = 30;
+    }
+
+    Timer {
+        id: startTimer
+         interval: 3000; running: false; repeat: false
+         onTriggered: readerTools.opacity = 0
     }
 
     Flickable {
@@ -64,11 +72,16 @@ Page {
             }
 
             function setFontSize(diff) {
+                startTimer.running = false;
                 var newSize = fontSize+diff;
                 if(newSize > 8 && newSize < 60) {
                     fontSize = newSize;
                     evaluateJavaScript("document.getElementById('body').style.fontSize = '"+fontSize+"px';");
                 }
+            }
+            onDoubleClick: {
+                startTimer.running = false;
+                readerTools.opacity = (readerTools.opacity == 0) ? 1 :0;
             }
         }
     }
@@ -77,74 +90,82 @@ Page {
         flickableItem: flickable
     }
 
-    ToolBarLayout {
-        id: readerTools
-        ToolIcon {
-            id: backIcon
-            iconId: "toolbar-back";
-            onClicked: {
-                appWindow.setFullScreen(false);
-                pageStack.pop();
-            }
+    ToolBar {
+        id:readerTools
+        anchors.bottom: parent.bottom
+        opacity: 1
+        Behavior on opacity {
+            NumberAnimation { duration: 300 }
         }
-        ToolButton {
-            id: readerOpenUrl
-            anchors.left: backIcon.right
-            anchors.leftMargin: 10
-            anchors.verticalCenter: parent.verticalCenter
-            width: 230
-            text: "open in browser"
-            onClicked: {
-                Qt.openUrlExternally ( url )
-            }
-        }
-        Rectangle {
-            width:80
-            height:parent.height
-            color: "transparent"
-            anchors.right: downIconBox.left
-            Image {
-                id: upIcon
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter: parent.verticalCenter
-                source: "gfx/fontsize_up.png"
-                Behavior on opacity {
-                    NumberAnimation { duration: 500 }
-                }
-            }
-            MouseArea {
-                anchors.fill: parent
+        tools: ToolBarLayout {
+            ToolIcon {
+                id: backIcon
+                iconId: "toolbar-back";
                 onClicked: {
-                    webView.setFontSize(+2);
+                    appWindow.setFullScreen(false);
+                    readerTools.opacity = 0;
+                    pageStack.pop();
                 }
-                onPressed: {upIcon.opacity = 0.1}
-                onReleased: {upIcon.opacity = 1}
-                onCanceled: {upIcon.opacity = 1}
             }
-        }
-        Rectangle {
-            id: downIconBox
-            width:80
-            height:parent.height
-            anchors.right: parent.right
-            color: "transparent"
-            Image {
-                id: downIcon
-                anchors.horizontalCenter: parent.horizontalCenter
+            ToolButton {
+                id: readerOpenUrl
+                anchors.left: backIcon.right
+                anchors.leftMargin: 10
                 anchors.verticalCenter: parent.verticalCenter
-                source: "gfx/fontsize_down.png"
-                Behavior on opacity {
-                    NumberAnimation { duration: 500 }
+                width: 230
+                text: "open in browser"
+                onClicked: {
+                    Qt.openUrlExternally ( url )
                 }
             }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    webView.setFontSize(-2);
+            Rectangle {
+                width:80
+                height:parent.height
+                color: "transparent"
+                anchors.right: downIconBox.left
+                Image {
+                    id: upIcon
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    source: "gfx/fontsize_up.png"
+                    Behavior on opacity {
+                        NumberAnimation { duration: 500 }
+                    }
                 }
-                onPressed: {downIcon.opacity = 0.1}
-                onReleased: {downIcon.opacity = 1}
-                onCanceled: {downIcon.opacity = 1}
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        webView.setFontSize(+2);
+                    }
+                    onPressed: {upIcon.opacity = 0.1}
+                    onReleased: {upIcon.opacity = 1}
+                    onCanceled: {upIcon.opacity = 1}
+                }
+            }
+            Rectangle {
+                id: downIconBox
+                width:80
+                height:parent.height
+                anchors.right: parent.right
+                color: "transparent"
+                Image {
+                    id: downIcon
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    source: "gfx/fontsize_down.png"
+                    Behavior on opacity {
+                        NumberAnimation { duration: 500 }
+                    }
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        webView.setFontSize(-2);
+                    }
+                    onPressed: {downIcon.opacity = 0.1}
+                    onReleased: {downIcon.opacity = 1}
+                    onCanceled: {downIcon.opacity = 1}
+                }
             }
         }
     }
