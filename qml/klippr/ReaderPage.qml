@@ -28,8 +28,9 @@ Page {
         return html
     }
 
-    function render(clip) {
+    function render(clip) {        
         clear()
+        appWindow.setFullScreen(true);
         url = clip.url
         webView.html = buildHtml(clip)
         fontSize = 30;
@@ -82,6 +83,7 @@ Page {
             id: backIcon
             iconId: "toolbar-back";
             onClicked: {
+                appWindow.setFullScreen(false);
                 pageStack.pop();
             }
         }

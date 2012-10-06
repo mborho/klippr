@@ -12,10 +12,10 @@ PageStackWindow {
     id: appWindow
     initialPage: mainPage
     Component.onCompleted: onStartup()
-    showStatusBar: (screen.currentOrientation === Screen.Portrait) ? true : false
-
+    property bool forceFullScreen: false
     property string _username: ""
     property string _apiToken: ""
+    showStatusBar: (screen.currentOrientation === Screen.Portrait && !forceFullScreen) ? true : false
 
     FontLoader { id: kipprFont; source: "fonts/sansus-webissimo-Italic.ttf" }
 
@@ -56,6 +56,10 @@ PageStackWindow {
             Kippt.Data.setUser({username:_username});
             loadAllLists();
         }
+    }
+
+    function setFullScreen(active) {
+        forceFullScreen = active
     }
 
     function getConnector() {
