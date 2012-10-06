@@ -1,3 +1,8 @@
+klippr (1.2.0) unstable; urgency=low
+  * Reader in fullscreen, navigation flow improved
+
+ -- Martin Borho <martin@borho.net>  Sat, 06 Oct 2012 16:33:38 +0200
+
 klippr (1.0.1) unstable; urgency=low
   * Ovi store
 
