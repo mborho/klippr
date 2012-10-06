@@ -15,7 +15,6 @@ Page {
     property bool starred: false
     property bool read_later: false
     property string article: ""
-    property bool jumpToOverview: false
     property bool feedView: false
     property bool searchView: false
 
@@ -86,15 +85,6 @@ Page {
     }
 
     function update(clip, currentList) {
-        if(currentList === "read_later") {
-            if(read_later === true && read_later !== clip.is_read_later) {
-                jumpToOverview = true
-            } else jumpToOverview = false
-        } else if(currentList === "starred") {
-            if(starred === true && starred !== clip.is_starred) {
-                jumpToOverview = true
-            } else jumpToOverview = false
-        }
         clipTitle.text = clip.title;
         clipDate.text = formatDate(clip.updated);
         if(clip.notes || clipNotes.text != "") {
@@ -109,9 +99,6 @@ Page {
         clipList.text = list.title;
         hideSpinner();
         var currentList = Kippt.Data.getList();
-//        if(!isNaN(parseInt(currentList.id))) {
-//            jumpToOverview = true;
-//        }
     }
 
     function clear() {
@@ -139,7 +126,6 @@ Page {
         starred = clip.is_starred;
         read_later = clip.is_read_later;
         article = (clip.article) ? clip.article : ""
-        jumpToOverview = false
         handleFlickableInteraction()
     }
 
@@ -186,7 +172,7 @@ Page {
             path: '/api/clips/'+clipId+'/',
             data: params,
             search: searchView
-        }
+        }        
         appWindow.updateClip(options)
     }
 
@@ -319,11 +305,7 @@ Page {
             id:clipNavBack
             iconId: "toolbar-back";
             onClicked: {
-                if(jumpToOverview) {
-                    pageStack.pop(mainPage);
-                } else {
-                    pageStack.pop();
-                }
+                pageStack.pop();
                 clipMenu.close()
             }
         }

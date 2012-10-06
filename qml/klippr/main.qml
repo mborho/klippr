@@ -176,6 +176,11 @@ PageStackWindow {
                 var listId;
                 searchPage.item.updateClipInList(clip)
             }
+            // remove clip from list
+            if((listId === "read_later" && options.data.is_read_later === false) ||
+                (listId === "starred" && options.data.is_starred === false)) {
+                    listPage.item.updateClipInList(clip, true);
+            }
             clipPage.item.update(clip, listId);
         }, onApiError);
     }
