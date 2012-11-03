@@ -18,10 +18,21 @@ Page {
         webView.html = ""
     }
 
+    function goBack() {
+        appWindow.setFullScreen(false);
+        readerTools.opacity = 0;
+        pageStack.pop();
+    }
+
     function buildHtml(clip) {
         var html = '<html><style>html {background:#000;} body {color:#fff;font-size:32px;margin-bottom:75px;} a {color:#FFF;font-weight:bold;} ';
         html += 'a:hover {color:#8B8B8B;} img {max-width:100%} span {font-size:85%;} pre {font-size:85%;white-space:pre-wrap;}</style><body id="body">';
-        html += '<script>document.onclick= function(e){if(e.target.href) {window.qml.openUrl(e.target.href);};return false;}</script>';
+        html += '<script>document.onclick= function(e){if(e.target.href) {window.qml.openUrl(e.target.href);};return false;};var xpos, y_pos;';
+        html += 'function getPosition(e) {var x, y;if (e.pageX || e.pageY) {x = e.pageX;y = e.pageY;} else {x = e.clientX + document.body.scrollLeft';
+        html += '+document.documentElement.scrollLeft;y = e.clientY + document.body.scrollTop +document.documentElement.scrollTop;}return [x, y];};'
+        html += 'document.onmousedown = function(e) {pos = getPosition(e);x_pos=pos[0];y_pos=pos[1];};';
+        html += 'document.onmouseup = function(e) {pos = getPosition(e);if(pos[0]-x_pos>170){window.qml.swipeBack();};}';
+        html += '</script>';
         html += '<h2 id="title">'+clip.title+'</h2>'
         html += clip.html
         html += '</body></html>'
@@ -54,10 +65,14 @@ Page {
             preferredHeight: flickable.height
             scale: 1
             settings.javascriptEnabled: true
+            pressGrabTime: 2400
             javaScriptWindowObjects: QtObject {
                 WebView.windowObjectName: "qml"
                 function consoleLog(msg){
                     console.log(msg)
+                }
+                function swipeBack(){
+                    goBack();
                 }
                 function openUrl(url) {
                     Qt.openUrlExternally ( url )
@@ -93,9 +108,7 @@ Page {
                 id: backIcon
                 iconId: "toolbar-back";
                 onClicked: {
-                    appWindow.setFullScreen(false);
-                    readerTools.opacity = 0;
-                    pageStack.pop();
+                    goBack();
                 }
             }
             ToolButton {
