@@ -21,10 +21,16 @@ PageStackWindow {
 
     Connections {
          target: KipptConnector
-         onClipDeleted: {
+         onClipDeleted: {        
             clipPage.item.hideSpinner()
             if(statusCode === 204) {
-                pageStack.pop(mainPage);
+                 var clip = Kippt.Data.getClip();
+                 if(Kippt.Data.getList().id !== "search") {
+                     listPage.item.updateClipInList(clip, true);
+                     pageStack.pop();
+                 } else {
+                     pageStack.pop(mainPage);
+                 }
             }
          }
          onListDeleted: {
