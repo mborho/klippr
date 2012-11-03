@@ -62,6 +62,7 @@ var Connector = function(username, token) {
     this.username = username
     this.token = token
     this.endpoint = "https://kippt.com";
+    this.xmlHttp = new XMLHttpRequest();
 
 }
 
@@ -124,7 +125,7 @@ Connector.prototype.doRequest = function(options) {
     var url = options.url,
         method = (options.method) ? options.method :"GET",
         data = (options.data) ? JSON.stringify(options.data) : null,
-        xmlHttp = new XMLHttpRequest();
+        xmlHttp = this.xmlHttp;
 //    var start = Date.now();
 //    if(data) console.log(data);
     if (xmlHttp) {
