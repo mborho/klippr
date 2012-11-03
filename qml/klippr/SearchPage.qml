@@ -71,8 +71,12 @@ Page {
         clipsList.render(links)
     }
 
-    function updateClipInList(clip) {
-        clipsList.updateClip(clip);
+    function updateClipInList(clip, moved) {
+        if(moved) {
+            clipsList.removeClip(clip);
+        } else {
+            clipsList.updateClip(clip);
+        }
     }
 
     Keys.onPressed: {
