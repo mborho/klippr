@@ -30,8 +30,8 @@ Page {
         html += '<script>document.onclick= function(e){if(e.target.href) {window.qml.openUrl(e.target.href);};return false;};var xpos, y_pos;';
         html += 'function getPosition(e) {var x, y;if (e.pageX || e.pageY) {x = e.pageX;y = e.pageY;} else {x = e.clientX + document.body.scrollLeft';
         html += '+document.documentElement.scrollLeft;y = e.clientY + document.body.scrollTop +document.documentElement.scrollTop;}return [x, y];};'
-        html += 'document.onmousedown = function(e) {pos = getPosition(e);x_pos=pos[0];y_pos=pos[1];};';
-        html += 'document.onmouseup = function(e) {pos = getPosition(e);if(pos[0]-x_pos>170){window.qml.swipeBack();};}';
+        html += 'document.onmousedown = function(e) {var pos = getPosition(e);x_pos=pos[0];y_pos=pos[1];};';
+        html += 'document.onmousemove = function(e) {var pos = getPosition(e);if(pos[0]-x_pos>200 && pos[1]-y_pos<25 && pos[1]-y_pos>-25){window.qml.swipeBack();};};';
         html += '</script>';
         html += '<h2 id="title">'+clip.title+'</h2>'
         html += clip.html
