@@ -21,7 +21,9 @@ Page {
     function goBack() {
         appWindow.setFullScreen(false);
         readerTools.opacity = 0;
-        pageStack.pop();
+        if(!pageStack.busy) {
+            pageStack.pop();
+        }
     }
 
     function buildHtml(clip) {
