@@ -1,3 +1,13 @@
+klippr (1.6.0) unstable; urgency=low  
+  * Added option to share clips via ShareUi
+
+ -- Martin Borho <martin@borho.net>  Sun, 18 Nov 2012 14:21:28 +0100
+
+klippr (1.4.1) unstable; urgency=low
+  * bugfix for freezes after leaving reader
+
+ -- Martin Borho <martin@borho.net>  Sat, 10 Nov 2012 13:38:07 +0100
+
 klippr (1.4.0) unstable; urgency=low
   *  Reader "swipe-back" gesture added, delete flow improved
 

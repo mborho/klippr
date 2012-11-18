@@ -25,11 +25,10 @@ Dialog {
              msg += 'Source: <a style="color:red" href="http://github.com/mborho/klippr">http://github.com/mborho/klippr</a><br/>';
              msg += 'Header font: <a style="color:red" href="http://openfontlibrary.org/en/font/sansus-webissimo">Sansus Webissimo</a>'
              msg += '<div><b>Changelog:</b><br/>'
-             msg += '<div>* 1.4.0 - Reader "swipe-back" gesture, delete flow impr.</div>';
+             msg += '<div>* 1.6.0 - Added option to share clips via ShareUi</div>';
+             msg += '<div>* 1.4.1 - Reader "swipe-back" gesture, delete flow impr.</div>';
              msg += '<div>* 1.2.0 - Reader in fullscreen, navigation flow improved</div>';
              msg += '<div>* 1.0.1 - Ovi store</div>';
-             msg += '<div>* 0.8.0 - Reader fontsize adjustable, username in Feed</div>';
-             msg += '<div>* 0.6.0 - Search added, bugfixes</div>';
              msg += '</div>';
              msg += '</p><br/>';
              msg += '<table><tr><td valign="middle">powered by </td>';
