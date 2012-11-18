@@ -390,7 +390,13 @@ Page {
                 }
             }
             MenuItem {
-                text: "Move to list"
+                text: "Share"
+                onClicked: {
+                    Share.shareLink(clipUrl.text, clipTitle.text);
+                }
+            }
+            MenuItem {
+                text: "Move to list ..."
                 onClicked: {
                     moveToDialog.show()
                 }
