@@ -44,6 +44,6 @@ void ShareHelper::shareLink (const QString &link, const QString &title) {
     }
 #else
     Q_UNUSED(title)
-    Q_UNUSED(url)
+    Q_UNUSED(link)
 #endif
 }
