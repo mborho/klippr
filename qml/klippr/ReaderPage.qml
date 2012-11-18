@@ -11,7 +11,7 @@ Page {
     id: readerPage
     tools: null
     property string url: ""
-    property int fontSize: 30;
+    property int fontSize: 32;
 
     function clear() {
         url = ""
@@ -47,7 +47,7 @@ Page {
         readerTools.opacity = 0;
         url = clip.url
         webView.html = buildHtml(clip)
-        fontSize = 30;
+        fontSize = 32;
     }
 
     Flickable {
@@ -59,6 +59,7 @@ Page {
         interactive: true
         clip: true
         flickableDirection: Flickable.VerticalFlick
+        flickDeceleration: 4500
 
         WebView {
             id: webView
@@ -141,7 +142,7 @@ Page {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        webView.setFontSize(+2);
+                        webView.setFontSize(+1);
                     }
                     onPressed: {upIcon.opacity = 0.1}
                     onReleased: {upIcon.opacity = 1}
