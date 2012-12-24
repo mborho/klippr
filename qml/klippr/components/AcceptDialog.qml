@@ -9,15 +9,19 @@ Dialog {
     id: acceptDialog
     width: parent.width*0.7
     property string ressourceType: ""
+    property string clipId: ""
 
-    function ask(type, msg) {
+    function ask(type, msg, id) {
         askText.text = msg
         ressourceType = type
+        clipId = (id) ? id : "";
         open()
     }
 
     function accepted() {
-        if(ressourceType == "clip") {
+        if(ressourceType == "listclip" && clipId !== "") {
+            listPage.item.deleteClip(clipId)
+        } else if(ressourceType == "clip") {
             clipPage.item.deleteClip()
         } else if(ressourceType == "list") {
             listPage.item.deleteList()

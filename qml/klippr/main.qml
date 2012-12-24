@@ -21,13 +21,20 @@ PageStackWindow {
 
     Connections {
          target: KipptConnector
-         onClipDeleted: {        
-            clipPage.item.hideSpinner()
-            if(statusCode === 204) {
+         onClipDeleted: {
+            if(pageStack.depth === 2) {
+                // clip deleted from context menu
+                listPage.item.hideSpinner()
+            } else {
+                clipPage.item.hideSpinner();
+            }
+            if(statusCode === 204) {                
                 var clip = Kippt.Data.getClip();
                 if(Kippt.Data.getList().id !== "search") {
                     listPage.item.updateClipInList(clip, true);
-                    pageStack.pop();
+                    if(pageStack.depth > 2) { // deleted from clip page
+                        pageStack.pop();
+                    }
                 } else if(Kippt.Data.getList().id === "search") {
                     searchPage.item.updateClipInList(clip, true);
                     pageStack.pop();

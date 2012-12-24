@@ -5,6 +5,7 @@ GPLv3 - see License.txt for details
 import QtQuick 1.1
 import com.nokia.meego 1.0
 import com.nokia.extras 1.1
+import "../js/kippt.js" as Kippt
 
  Rectangle {
     id: clipsList
@@ -53,9 +54,10 @@ import com.nokia.extras 1.1
     }
 
     function removeClip(clip) {
-        var max = clipsModel.count;
+        var max = clipsModel.count,
+            clipId = parseInt(clip.id);
         for(var x=0; max>x;x++) {
-            if(clipsModel.get(x).id === clip.id) {
+            if(clipsModel.get(x).id === clipId) {
                 clipsModel.remove(x);
                 break;
             }
@@ -199,12 +201,43 @@ import com.nokia.extras 1.1
                 onPressed: {parent.color = "#171717"}
                 onReleased: {parent.color = "#3B3B3B"}
                 onCanceled: {parent.color = "#3B3B3B"}
+                onPressAndHold: {
+                    if(!feedView && updated) {
+                        clipContextMenu.clipId = id;
+                        clipContextMenu.clipUrl = url;
+                        clipContextMenu.clipTitle = title;
+                        clipContextMenu.open()
+                    }
+                }
             }
             Rectangle {
                 anchors.bottom: parent.bottom
                 height:1
                 width:parent.width
                 color: "#171717"
+            }
+        }
+    }
+
+    // Create a menu with different menu items.
+    ContextMenu {
+        id: clipContextMenu
+        property string clipId: "";
+        property string clipUrl: "";
+        property string clipTitle: "";
+        MenuLayout {
+            MenuItem {
+                text: "Delete"
+                onClicked: {
+                    Kippt.Data.setClip({id: clipContextMenu.clipId});
+                    acceptDialog.ask("listclip", "Delete this clip?", clipContextMenu.clipId)
+                }
+            }
+            MenuItem {
+                text: "Share";
+                onClicked: {
+                    Share.shareLink(clipContextMenu.clipUrl, clipContextMenu.clipTitle);
+                }
             }
         }
     }

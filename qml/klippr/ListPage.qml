@@ -118,6 +118,14 @@ Page {
         appWindow.deleteList(options);
     }
 
+    function deleteClip(clipId) {
+        showSpinner()
+        var options = {
+            path: '/api/clips/'+clipId+'/'
+        }
+        appWindow.deleteClip(options);
+    }
+
     function updateClipInList(clip, moved) {
         if(moved) {
             clipsList.removeClip(clip);
