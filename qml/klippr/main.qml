@@ -37,7 +37,9 @@ PageStackWindow {
                     }
                 } else if(Kippt.Data.getList().id === "search") {
                     searchPage.item.updateClipInList(clip, true);
-                    pageStack.pop();
+                    if(pageStack.depth > 2) { // deleted from clip page
+                        pageStack.pop();
+                    }
                 } else {
                     pageStack.pop(mainPage);
                 }
